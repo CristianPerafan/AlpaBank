@@ -1,7 +1,6 @@
 package controller;
 
 import application.Main;
-import javafx.fxml.FXML;
 
 public class MenuBarController {
 	
@@ -11,9 +10,20 @@ public class MenuBarController {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@FXML
-	public void showMainMenuview() {
+	public void registerMovement() {
+		main.showRegisterAMovement();
+	}
+
+	public void viewMovements() {
+		main.showMovementsTable();
+	}
+	
+	public void backToMainView() {
 		main.showMenuBarAndMainMenuInSameStage();
+	}
+	
+	public void exit() {
+		main.logOut();
 	}
 	
 	public void setMain(Main main) {

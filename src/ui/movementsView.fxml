@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="225.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MovementsViewController">
+   <center>
+      <BorderPane prefHeight="225.0" prefWidth="480.0" BorderPane.alignment="CENTER">
+         <top>
+            <TableView fx:id="movementsTable" prefHeight="200.0" prefWidth="446.0" BorderPane.alignment="CENTER">
+               <columns>
+                  <TableColumn fx:id="amountColumn" prefWidth="121.0" text="Monto" />
+                  <TableColumn fx:id="descriptionColumn" prefWidth="126.0" text="Descripción" />
+                  <TableColumn fx:id="typeColumn" prefWidth="74.0" text="Tipo" />
+                  <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Fecha" />
+               </columns>
+            </TableView>
+         </top>
+      </BorderPane>
+   </center>
+</BorderPane>
