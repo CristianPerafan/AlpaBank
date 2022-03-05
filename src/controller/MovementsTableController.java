@@ -38,7 +38,7 @@ public class MovementsTableController {
 	private Button uptadeTableButton;
 	
 	@FXML
-	private Text wastedMoneyText,earnedMoneyText;
+	private Text wastedMoneyText,earnedMoneyText,moneyBalanceText;
 	
 	
 	
@@ -67,11 +67,12 @@ public class MovementsTableController {
 		
 		movementsModel = main.returnMovement();
 		
-		LocalDate date = LocalDate.now();
 		
 		try {
-			movementsModel.add(new BankMovement(20000,"Transporte",0,date));
-			movementsModel.add(new BankMovement(20000,"Pago prima",1,date));
+			
+			movementsModel.add(new BankMovement(500000,"Venta bicicleta",1, LocalDate.of(2022,02, 23)));
+			movementsModel.add(new BankMovement(200000,"Cumpleaños hermana",0, LocalDate.of(2022,02, 24)));
+			movementsModel.add(new BankMovement(200000,"Zapatillas",0,LocalDate.now()));
 		} catch (InvalidDataException e) {
 			e.printStackTrace();
 		}
@@ -79,6 +80,23 @@ public class MovementsTableController {
 		ObservableList<BankMovement> movements = FXCollections.observableArrayList(movementsModel);
 		movementsTable.setItems(movements);
 		
+		
+		wastedMoneyText.setText("$ "+String.valueOf( calculateWastedMoney(movementsModel)));
+		wastedMoneyText.setVisible(true);
+		
+
+		earnedMoneyText.setText("$ "+String.valueOf(calculateEarnedMoney(movementsModel)));
+		earnedMoneyText.setVisible(true);
+		
+		moneyBalanceText.setText("$ "+String.valueOf( calculateMoneyBalance(movementsModel)));
+		moneyBalanceText.setVisible(true);
+		
+		
+		
+		
+	}
+	
+	public double calculateWastedMoney(ArrayList<BankMovement> movementsModel) {
 		double wastedMoney = 0;
 		
 		for(int i = 0;i<movementsModel.size();i++) {
@@ -86,10 +104,11 @@ public class MovementsTableController {
 				wastedMoney += movementsModel.get(i).getAmount();
 			}
 		}
-		wastedMoneyText.setText("$ "+String.valueOf(wastedMoney));
-		wastedMoneyText.setVisible(true);
 		
+		return wastedMoney;
+	}
 	
+	public double calculateEarnedMoney(ArrayList<BankMovement> movementsModel) {
 		double earnedMoney = 0;
 		for(int i = 0;i<movementsModel.size();i++) {
 			if(movementsModel.get(i).getType() == TypeOfMovement.INGRESO) {
@@ -97,11 +116,30 @@ public class MovementsTableController {
 			}
 		}
 		
-		earnedMoneyText.setText("$ "+String.valueOf(earnedMoney));
-		earnedMoneyText.setVisible(true);
-		
-		
+		return earnedMoney;
 	}
+	
+	public double calculateMoneyBalance(ArrayList<BankMovement> movementsModel) {
+		double balance = 0;
+		
+		double wastedMoney = 0;
+		double earnedMoney = 0;
+		
+		for(int i = 0;i<movementsModel.size();i++) {
+			if(movementsModel.get(i).getType() == TypeOfMovement.INGRESO) {
+				earnedMoney += movementsModel.get(i).getAmount();
+			}
+			else if(movementsModel.get(i).getType() == TypeOfMovement.GAST0) {
+				wastedMoney += movementsModel.get(i).getAmount();
+			}
+		}
+		
+		balance = earnedMoney-wastedMoney;
+		
+		return balance;
+	}
+	
+	
 	
 	
 	
