@@ -8,13 +8,9 @@ import exceptions.InvalidDataException;
 public class BankMovement {
 	
 	//Attributes
-	@SuppressWarnings("unused")
 	private double amount;
-	@SuppressWarnings("unused")
 	private String description;
-	@SuppressWarnings("unused")
 	private TypeOfMovement type;
-	@SuppressWarnings("unused")
 	private LocalDate date;
 	
 	public BankMovement(double amount, String description,int identifier,LocalDate date) throws InvalidDataException {

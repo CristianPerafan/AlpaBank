@@ -1,6 +1,7 @@
 package application;
 	
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import controller.InitialViewController;
@@ -8,6 +9,7 @@ import controller.MainMenuController;
 import controller.MenuBarController;
 import controller.MovementsTableController;
 import controller.RegisterAMovementViewController;
+import exceptions.InvalidDataException;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.AlfaBank;
@@ -33,6 +35,7 @@ public class Main extends Application {
 		
 		users = new Users();
 		alfaBank = new AlfaBank();
+		burnValues();
 		
 		users.addUser("admin","admin");
 		try {
@@ -180,6 +183,21 @@ public class Main extends Application {
 	public void logOut() {
 		currentStage.close();
 		showInitialView();
+	}
+	
+	public void burnValues() {
+		
+		try {
+			addAMomevent(new BankMovement(500000,"Venta bicicleta",1, LocalDate.of(2022,02, 23)));
+			addAMomevent(new BankMovement(200000,"Cumpleaños hermana",0, LocalDate.of(2022,02, 24)));
+			addAMomevent(new BankMovement(200000,"Zapatillas",0,LocalDate.of(2022,02,25)));
+			addAMomevent(new BankMovement(200000,"Paseo",0,LocalDate.of(2022,01,06)));
+			
+			
+		} catch (InvalidDataException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

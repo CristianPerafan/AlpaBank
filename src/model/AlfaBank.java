@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class AlfaBank {
 	
 	ArrayList<BankMovement> movementList  = new ArrayList<>();
+
 	
 	public AlfaBank() {
 	
@@ -16,16 +17,6 @@ public class AlfaBank {
 		
 		movementList.add(bankMovement);
 		
-	}
-	
-	public boolean thereIsAtLeastOne() {
-		boolean out = false;
-		for(int i = 0;i<movementList.size();i++) {
-			if(movementList.get(i) != null) {
-				out = true;
-			}
-		}
-		return out;
 	}
 	
 	public ArrayList<BankMovement> returnMovements(){
