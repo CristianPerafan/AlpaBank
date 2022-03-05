@@ -43,7 +43,6 @@ public class RegisterAMovementViewController {
 	
 
 	public RegisterAMovementViewController() {
-		System.out.println(main);
 		
 	}
 	
@@ -84,6 +83,7 @@ public class RegisterAMovementViewController {
 			double amount = Double.parseDouble(auxAmount);
 			BankMovement obj = new BankMovement(amount,description,typeOfMovement,date);
 			
+			System.out.println("main rm :"+main);
 			main.addAMomevent(obj);
 			
 			//
@@ -92,6 +92,7 @@ public class RegisterAMovementViewController {
 			alert.setHeaderText("El movimiento ha sido registrado!!");
 			alert.showAndWait();
 			main.showMenuBarAndMainMenuInSameStage();
+			
 			
 		
 			

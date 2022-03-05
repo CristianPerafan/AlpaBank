@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import controller.InitialViewController;
 import controller.MainMenuController;
 import controller.MenuBarController;
-import controller.MovementsViewController;
+import controller.MovementsTableController;
 import controller.RegisterAMovementViewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -57,6 +57,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("../ui/application.css").toExternalForm());
 			
+			
 			Stage stage = new Stage();
 			stage.setScene(scene);
 			stage.show();
@@ -76,6 +77,7 @@ public class Main extends Application {
 			BorderPane root = (BorderPane)loader.load();
 			
 			MenuBarController controller = loader.getController();
+			
 			controller.setMain(this);
 			
 			Scene scene = new Scene(root);
@@ -95,6 +97,8 @@ public class Main extends Application {
 			
 			newRoot = (BorderPane)stage.getScene().getRoot();
 			newRoot.setCenter(mainMenu);
+			
+			
 		
 			stage.show();
 		}
@@ -103,46 +107,6 @@ public class Main extends Application {
 		}
 	}
 	
-	public void showMovementsTable() {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../ui/MenuBar.fxml"));
-			BorderPane root = (BorderPane)loader.load();
-			
-			MenuBarController controller = loader.getController();
-			controller.setMain(this);
-			
-			Scene scene = new Scene(root);
-			
-			Stage stage = new Stage();
-			
-			stage.setScene(scene);
-			
-			//stage.show();
-			currentStage.close();
-			
-			
-			
-			BorderPane newRoot;
-			
-			//Addition
-			FXMLLoader tableViewLoader = new FXMLLoader(getClass().getResource("../ui/movementsView.fxml"));
-			BorderPane tableView = (BorderPane)tableViewLoader.load();
-			
-			MovementsViewController viewController = tableViewLoader.getController();
-			viewController.setMain(this);
-			
-			newRoot = (BorderPane)stage.getScene().getRoot();
-			newRoot.setCenter(tableView);
-			
-			currentStage = stage;
-			stage.show();
-			
-		
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-		}
-	}
 	
 	public void showRegisterAMovement() {
 		try {
@@ -151,6 +115,7 @@ public class Main extends Application {
 			BorderPane root = (BorderPane)loader.load();
 			
 			MenuBarController controller = loader.getController();
+			
 			controller.setMain(this);
 			
 			Scene scene = new Scene(root);
@@ -170,7 +135,9 @@ public class Main extends Application {
 			BorderPane mainMenu = (BorderPane)registerloader.load();
 			
 			RegisterAMovementViewController registerController = registerloader.getController();
+			System.out.print("Register a movement: "+this);
 			registerController.setMain(this);
+			
 			
 			newRoot = (BorderPane)stage.getScene().getRoot();
 			newRoot.setCenter(mainMenu);
@@ -182,9 +149,50 @@ public class Main extends Application {
 			
 		}
 		catch(IOException e) {
+			System.out.println("Exception de registro");
 			e.printStackTrace();
 		}
 	}
+	
+	public void showMovementsTable() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../ui/MenuBar.fxml"));
+			BorderPane root = (BorderPane)loader.load();
+			
+			MenuBarController controller = loader.getController();
+			System.out.println("Menu Bar: "+this);
+			controller.setMain(this);
+			
+			Scene scene = new Scene(root);
+			
+			Stage stage = new Stage();
+			
+			stage.setScene(scene);
+			
+			currentStage.close();
+			
+			BorderPane newRoot;
+			
+			
+			FXMLLoader tableViewLoader = new FXMLLoader(getClass().getResource("../ui/MovementsTable.fxml"));
+			BorderPane tableView = (BorderPane)tableViewLoader.load();
+			
+			MovementsTableController viewController = tableViewLoader.getController();
+			viewController.setMain(this);
+			
+			newRoot = (BorderPane)stage.getScene().getRoot();
+			newRoot.setCenter(tableView);
+			
+			currentStage = stage;
+			stage.show();
+		
+		}
+		catch(IOException e) {
+			System.out.println("Exception");
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 	public void logOut() {
@@ -196,7 +204,11 @@ public class Main extends Application {
 		alfaBank.addMovement(movement);
 	}
 	
-	public ArrayList<BankMovement> returnMovement() {
+	public Main returnMain() {
+		return this;
+	}
+	
+	public ArrayList<BankMovement> returnMovement() {		
 		ArrayList<BankMovement> arrayList = alfaBank.returnMovements();
 		return arrayList;
 	}

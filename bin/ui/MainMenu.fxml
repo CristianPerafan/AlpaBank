@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenuController">
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="400.0" prefWidth="61.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="299.0" fitWidth="366.0" layoutX="151.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../source/MAIN%20VIEW.png" />
-               </image>
-            </ImageView>
+            <Button fx:id="openButton" layoutX="109.0" layoutY="188.0" mnemonicParsing="false" onAction="#openTablaView" text="Abrir tabla" />
          </children>
       </AnchorPane>
    </center>
+   <left>
+      <ImageView fitHeight="299.0" fitWidth="366.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../../source/MAIN%20VIEW.png" />
+         </image>
+      </ImageView>
+   </left>
 </BorderPane>
