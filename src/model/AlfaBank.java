@@ -18,8 +18,27 @@ public class AlfaBank {
 		
 	}
 	
+	public boolean thereIsAtLeastOne() {
+		boolean out = false;
+		for(int i = 0;i<movementList.size();i++) {
+			if(movementList.get(i) != null) {
+				out = true;
+			}
+		}
+		return out;
+	}
+	
 	public ArrayList<BankMovement> returnMovements(){
-		return movementList;
+		
+		
+		ArrayList<BankMovement> aux  = new ArrayList<>();
+		
+		for(int i = 0;i<movementList.size();i++) {
+			if(movementList.get(i) != null) {
+				aux.add(movementList.get(i));
+			}
+		}
+		return aux;
 	}
 	
 	public String toString() {

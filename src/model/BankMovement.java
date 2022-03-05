@@ -38,8 +38,20 @@ public class BankMovement {
 				
 	}
 	
-	public String toString() {
-		return "Monto:"+amount+" Descripción: "+description+" Tipo: "+type+ "date: "+date;
+	public double getAmount() {
+		return amount;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+	
+	public TypeOfMovement getType() {
+		return type;
+	}
+	
+	public LocalDate getDate() {
+		return date;
 	}
 
 }

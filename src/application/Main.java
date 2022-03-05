@@ -124,7 +124,6 @@ public class Main extends Application {
 			
 			stage.setScene(scene);
 			
-			//stage.show();
 			currentStage.close();
 			
 			
@@ -149,56 +148,40 @@ public class Main extends Application {
 			
 		}
 		catch(IOException e) {
-			System.out.println("Exception de registro");
 			e.printStackTrace();
 		}
 	}
 	
 	public void showMovementsTable() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../ui/MenuBar.fxml"));
-			BorderPane root = (BorderPane)loader.load();
-			
-			MenuBarController controller = loader.getController();
-			System.out.println("Menu Bar: "+this);
-			controller.setMain(this);
-			
-			Scene scene = new Scene(root);
-			
-			Stage stage = new Stage();
-			
-			stage.setScene(scene);
-			
-			currentStage.close();
-			
-			BorderPane newRoot;
-			
 			
 			FXMLLoader tableViewLoader = new FXMLLoader(getClass().getResource("../ui/MovementsTable.fxml"));
-			BorderPane tableView = (BorderPane)tableViewLoader.load();
+			BorderPane root = (BorderPane)tableViewLoader.load();
 			
 			MovementsTableController viewController = tableViewLoader.getController();
+
 			viewController.setMain(this);
 			
-			newRoot = (BorderPane)stage.getScene().getRoot();
-			newRoot.setCenter(tableView);
 			
-			currentStage = stage;
+			Scene scene = new Scene(root);
+			Stage stage = new Stage();
+			stage.setScene(scene);
+
 			stage.show();
 		
+			
 		}
 		catch(IOException e) {
-			System.out.println("Exception");
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	
 	public void logOut() {
 		currentStage.close();
 		showInitialView();
 	}
+	
 	
 	public void addAMomevent(BankMovement movement) {
 		alfaBank.addMovement(movement);

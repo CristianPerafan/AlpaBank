@@ -42,6 +42,8 @@ public class RegisterAMovementViewController {
 
 	
 
+	
+
 	public RegisterAMovementViewController() {
 		
 	}
@@ -86,6 +88,8 @@ public class RegisterAMovementViewController {
 			System.out.println("main rm :"+main);
 			main.addAMomevent(obj);
 			
+			
+			
 			//
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Proceso exitoso!!");
@@ -97,7 +101,7 @@ public class RegisterAMovementViewController {
 		
 			
 		
-		}catch(InvalidDataException e) {
+		}catch(InvalidDataException | RuntimeException e) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error de registro!!");
 			alert.setHeaderText("Los datos no son válidos o están incompletos..");
