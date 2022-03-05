@@ -1,6 +1,7 @@
 package application;
 	
 import java.io.IOException;
+import java.util.ArrayList;
 
 import controller.InitialViewController;
 import controller.MainMenuController;
@@ -24,11 +25,14 @@ public class Main extends Application {
 	
 	private Users users;
 	
+	public AlfaBank alfaBank;
+	
 	
 	@Override
 	public void start(Stage primaryStage) {
 		
 		users = new Users();
+		alfaBank = new AlfaBank();
 		
 		users.addUser("admin","admin");
 		try {
@@ -101,12 +105,10 @@ public class Main extends Application {
 	
 	public void showMovementsTable() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("../ui/MovementsView.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../ui/MenuBar.fxml"));
 			BorderPane root = (BorderPane)loader.load();
 			
-			MovementsViewController controller = loader.getController();
-			
-			
+			MenuBarController controller = loader.getController();
 			controller.setMain(this);
 			
 			Scene scene = new Scene(root);
@@ -115,7 +117,26 @@ public class Main extends Application {
 			
 			stage.setScene(scene);
 			
+			//stage.show();
+			currentStage.close();
+			
+			
+			
+			BorderPane newRoot;
+			
+			//Addition
+			FXMLLoader tableViewLoader = new FXMLLoader(getClass().getResource("../ui/movementsView.fxml"));
+			BorderPane tableView = (BorderPane)tableViewLoader.load();
+			
+			MovementsViewController viewController = tableViewLoader.getController();
+			viewController.setMain(this);
+			
+			newRoot = (BorderPane)stage.getScene().getRoot();
+			newRoot.setCenter(tableView);
+			
+			currentStage = stage;
 			stage.show();
+			
 		
 		}
 		catch(IOException e) {
@@ -140,15 +161,21 @@ public class Main extends Application {
 			
 			//stage.show();
 			currentStage.close();
-			currentStage = stage;
+			
 			
 			BorderPane newRoot;
 			
-			BorderPane mainMenu = (BorderPane)FXMLLoader.load(getClass().getResource("../ui/RegisterAMovementView.fxml"));
+			//Addition
+			FXMLLoader registerloader = new FXMLLoader(getClass().getResource("../ui/RegisterAMovementView.fxml"));
+			BorderPane mainMenu = (BorderPane)registerloader.load();
+			
+			RegisterAMovementViewController registerController = registerloader.getController();
+			registerController.setMain(this);
 			
 			newRoot = (BorderPane)stage.getScene().getRoot();
 			newRoot.setCenter(mainMenu);
 			
+			currentStage = stage;
 			stage.show();
 			
 			
@@ -159,16 +186,20 @@ public class Main extends Application {
 		}
 	}
 	
-	public void Back() {
-		currentStage.close();
-		showMenuBarAndMainMenuInSameStage();
-	}
 	
 	public void logOut() {
 		currentStage.close();
 		showInitialView();
 	}
 	
+	public void addAMomevent(BankMovement movement) {
+		alfaBank.addMovement(movement);
+	}
+	
+	public ArrayList<BankMovement> returnMovement() {
+		ArrayList<BankMovement> arrayList = alfaBank.returnMovements();
+		return arrayList;
+	}
 	
 	
 	public static void main(String[] args) {

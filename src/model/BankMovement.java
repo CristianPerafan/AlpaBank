@@ -17,7 +17,6 @@ public class BankMovement {
 	@SuppressWarnings("unused")
 	private LocalDate date;
 	
-
 	public BankMovement(double amount, String description,int identifier,LocalDate date) throws InvalidDataException {
 		
 		this.amount = amount;
@@ -37,6 +36,10 @@ public class BankMovement {
 		
 		this.date = date;
 				
+	}
+	
+	public String toString() {
+		return "Monto:"+amount+" Descripción: "+description+" Tipo: "+type+ "date: "+date;
 	}
 
 }

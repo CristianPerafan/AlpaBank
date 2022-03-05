@@ -1,6 +1,8 @@
 package controller;
 
 import java.time.LocalDate;
+
+
 import application.Main;
 import exceptions.InvalidDataException;
 import javafx.event.ActionEvent;
@@ -11,7 +13,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import model.AlfaBank;
 import model.BankMovement;
 
 public class RegisterAMovementViewController {
@@ -34,23 +35,20 @@ public class RegisterAMovementViewController {
 	@FXML
 	private Button saveMovementButton;
 	
-
-	
-	private AlfaBank alfaBank; 
+ 
 		
 	private Main main;
 	
 
+	
+
 	public RegisterAMovementViewController() {
-		alfaBank = new AlfaBank();
+		System.out.println(main);
+		
 	}
 	
 	public void saveMovement(ActionEvent e) {
-		//saveMovementInformation();
-		
-		main.showMenuBarAndMainMenuInSameStage();
-		System.out.println(main);
-
+		saveMovementInformation();
 	}
 	
 	
@@ -85,32 +83,32 @@ public class RegisterAMovementViewController {
 		try {
 			double amount = Double.parseDouble(auxAmount);
 			BankMovement obj = new BankMovement(amount,description,typeOfMovement,date);
-			alfaBank.addMovement(obj);
+			
+			main.addAMomevent(obj);
 			
 			//
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Proceso exitoso!!");
 			alert.setHeaderText("El movimiento ha sido registrado!!");
 			alert.showAndWait();
-			
-			//main.showMenuBarAndMainMenuInSameStage();
+			main.showMenuBarAndMainMenuInSameStage();
 			
 		
 			
-		}catch(InvalidDataException | RuntimeException e) {
+		
+		}catch(InvalidDataException e) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error de registro!!");
 			alert.setHeaderText("Los datos no son válidos o están incompletos..");
-			
-			if(e instanceof RuntimeException) {
-				alert.setContentText("Debe ingresar un valor numérico en el monto");
-			}
+		    
 			alert.showAndWait();
 		}
 		
 	}
 	
+
 	
+
 	public void setMain(Main main) {
 		this.main = main;
 	}
